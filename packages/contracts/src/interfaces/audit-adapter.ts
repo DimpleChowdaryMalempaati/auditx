@@ -1,5 +1,8 @@
 import type { AuditEvent } from "./audit-event";
 
 export interface AuditAdapter {
-  save(event: AuditEvent): Promise<void>;
+  readonly name: string;
+  readonly version: string;
+
+  persist(event: AuditEvent): Promise<void>;
 }
