@@ -2,9 +2,11 @@
 
 Core engine for AuditX.
 
-Responsible for:
+## Responsibilities
 
-- Audit orchestration
-- Pipeline execution
-- Event enrichment
-- Adapter execution
+- Accept audit events
+- Validate events
+- Enrich events
+- Forward events to configured adapters
+
+The core package is storage agnostic.
