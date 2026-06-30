@@ -8,6 +8,7 @@
       "build": "tsdown"
     },
     "dependencies": {
+      "@auditx/contracts": "*",
       "@auditx/core": "*",
       "@auditx/postgres": "*",
       "express": "^5.1.0"

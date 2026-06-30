@@ -3,10 +3,13 @@ import { Pool, type PoolConfig } from "pg";
 import type { AuditEvent } from "@auditx/contracts";
 
 import { createTableQuery } from "./queries/create-table";
+import { insertAuditQuery } from "./queries/insert-audit";
 import type { PostgresConfig } from "./types/postgres-config";
 
 export class PostgresClient {
   private readonly pool: Pool;
+
+  private initialized = false;
 
   constructor(
     private readonly config: PostgresConfig
@@ -27,22 +30,47 @@ export class PostgresClient {
     }
   }
 
+  private get schema(): string {
+    return this.config.schema ?? "public";
+  }
+
+  private get table(): string {
+    return this.config.table ?? "audit_logs";
+  }
+
   async initialize(): Promise<void> {
+    if (this.initialized) {
+      return;
+    }
+
     const client = await this.pool.connect();
 
     try {
-      const schema = this.config.schema ?? "public";
-      const table = this.config.table ?? "audit_logs";
+      await client.query(
+        createTableQuery(this.schema, this.table)
+      );
 
-      await client.query(createTableQuery(schema, table));
+      this.initialized = true;
     } finally {
       client.release();
     }
   }
 
   async insert(event: AuditEvent): Promise<void> {
-    console.log("Persisting audit event", event);
+    await this.initialize();
 
-    // TODO: Implement INSERT query
+    const client = await this.pool.connect();
+
+    try {
+      const query = insertAuditQuery(
+        this.schema,
+        this.table,
+        event
+      );
+
+      await client.query(query.text, query.values);
+    } finally {
+      client.release();
+    }
   }
 }
