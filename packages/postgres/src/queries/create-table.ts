@@ -15,11 +15,13 @@ export function createTableQuery(
     CREATE TABLE IF NOT EXISTS ${safeSchema}.${safeTable} (
       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
+      timestamp TIMESTAMPTZ NOT NULL,
+
       action VARCHAR(100) NOT NULL,
 
       actor JSONB,
 
-      resource JSONB,
+      resource JSONB NOT NULL,
 
       request JSONB,
 
@@ -29,7 +31,7 @@ export function createTableQuery(
 
       metadata JSONB,
 
-      status VARCHAR(20),
+      status VARCHAR(20) NOT NULL,
 
       created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
