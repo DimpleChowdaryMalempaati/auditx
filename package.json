@@ -17,7 +17,11 @@
     "test": "npm run test --workspaces",
     "clean": "rimraf packages/**/dist apps/**/dist",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "docker:up": "docker compose -f docker/docker-compose.yml up -d",
+    "docker:down": "docker compose -f docker/docker-compose.yml down",
+    "docker:logs": "docker compose -f docker/docker-compose.yml logs -f",
+    "docker:ps": "docker compose -f docker/docker-compose.yml ps"
   },
   "keywords": [
     "audit",
