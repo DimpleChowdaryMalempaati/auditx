@@ -7,14 +7,16 @@ import {
 
 export class AuditEventMapper {
   map(context: TransportContext): AuditEvent {
+    const auditContext = context.auditContext;
+
     return {
       timestamp: new Date(),
 
-      action: this.resolveAction(context),
+      action: auditContext?.action ?? this.resolveAction(context),
 
       actor: context.actor,
 
-      resource: context.resource ?? {
+      resource: auditContext?.resource ?? {
         type: context.request.endpoint,
       },
 
@@ -26,9 +28,9 @@ export class AuditEventMapper {
         userAgent: context.request.userAgent,
       },
 
-      state: context.state,
+      state: auditContext?.state,
 
-      metadata: context.metadata,
+      metadata: auditContext?.metadata,
 
       status: this.resolveStatus(context.response.statusCode),
     };
