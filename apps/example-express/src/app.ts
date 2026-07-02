@@ -1,7 +1,7 @@
 import express from "express";
 
-import { AuditAction, AuditStatus, type AuditEvent } from "@auditx/contracts";
 import { AuditX } from "@auditx/core";
+import { createAuditMiddleware } from "@auditx/express";
 import { PostgresAdapter } from "@auditx/postgres";
 
 const app = express();
@@ -29,43 +29,9 @@ const audit = new AuditX({
   ],
 });
 
-app.get("/", async (_req, res) => {
-  const event: AuditEvent = {
-    timestamp: new Date(),
+app.use(createAuditMiddleware(audit));
 
-    action: AuditAction.READ,
-
-    resource: {
-      id: "health",
-      type: "system",
-    },
-
-    actor: {
-      id: "system",
-      name: "Example Application",
-    },
-
-    request: {
-      method: "GET",
-      endpoint: "/",
-    },
-
-    state: {
-      before: null,
-      after: {
-        status: "running",
-      },
-    },
-
-    metadata: {
-      source: "example-express",
-    },
-
-    status: AuditStatus.SUCCESS,
-  };
-
-  await audit.log(event);
-
+app.get("/", (_req, res) => {
   res.json({
     name: "AuditX",
     version: "0.1.0",

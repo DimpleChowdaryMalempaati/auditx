@@ -1,7 +1,26 @@
 export interface AuditRequest {
-    id?: string;
-    method?: string;
-    endpoint?: string;
-    ipAddress?: string;
-    userAgent?: string;
-  }
+  /**
+   * Correlation/request identifier.
+   */
+  requestId?: string;
+
+  /**
+   * HTTP method.
+   */
+  method?: string;
+
+  /**
+   * Request endpoint.
+   */
+  endpoint?: string;
+
+  /**
+   * Client IP address.
+   */
+  ip?: string;
+
+  /**
+   * Client user agent.
+   */
+  userAgent?: string;
+}
