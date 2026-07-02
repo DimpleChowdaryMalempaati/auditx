@@ -1,3 +1,5 @@
+import "./types/express";
+
 export { AuditMiddleware } from "./middleware/AuditMiddleware";
 export { createAuditMiddleware } from "./middleware/create-audit-middleware";
 

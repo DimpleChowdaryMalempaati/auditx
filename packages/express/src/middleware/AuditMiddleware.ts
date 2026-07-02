@@ -7,8 +7,10 @@ import type {
   
   import { AuditX } from "@auditx/core";
   
+  import { RequestAuditBuilder } from "../audit/RequestAuditBuilder";
   import { TransportContextBuilder } from "../builders/TransportContextBuilder";
   import { resolveActor } from "../resolvers/resolve-actor";
+  import { shouldAudit } from "./should-audit";
   import type { AuditMiddlewareOptions } from "../types/audit-middleware-options";
   
   export class AuditMiddleware {
@@ -25,6 +27,17 @@ import type {
         response: Response,
         next: NextFunction
       ): void => {
+        /**
+         * Every request receives its own request-scoped audit builder.
+         * Controllers can safely enrich audit information regardless
+         * of whether the request will ultimately be audited.
+         */
+        request.audit = new RequestAuditBuilder();
+  
+        if (!shouldAudit(request, this.options)) {
+          return next();
+        }
+  
         const startTime = Date.now();
   
         response.on("finish", async () => {

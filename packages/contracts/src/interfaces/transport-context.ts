@@ -1,6 +1,5 @@
 import type { AuditActor } from "./audit-actor";
-import type { AuditResource } from "./audit-resource";
-import type { AuditState } from "./audit-state";
+import type { AuditContext } from "./audit-context";
 
 export interface TransportContext {
   request: {
@@ -29,22 +28,14 @@ export interface TransportContext {
     duration: number;
   };
 
+  /**
+   * Authenticated actor associated with the request.
+   */
   actor?: AuditActor;
 
   /**
-   * Resource affected by the operation.
-   * Optional because the transport layer may not always know it.
+   * Business-specific audit information collected during
+   * request execution.
    */
-  resource?: AuditResource;
-
-  /**
-   * Before/after state of the resource.
-   * Optional because applications may choose not to provide it.
-   */
-  state?: AuditState;
-
-  /**
-   * Additional transport/application metadata.
-   */
-  metadata?: Record<string, unknown>;
+  auditContext?: AuditContext;
 }
