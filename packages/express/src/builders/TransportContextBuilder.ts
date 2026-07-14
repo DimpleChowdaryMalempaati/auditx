@@ -1,17 +1,18 @@
 import type { Request, Response } from "express";
 
-import type {
-  AuditActor,
-  TransportContext,
-} from "@auditx/contracts";
+import type { AuditActor, TransportContext } from "@auditx/contracts";
+
+import type { RequestAuditInternal } from "../audit/RequestAuditInternal";
 
 export class TransportContextBuilder {
   build(
     request: Request,
     response: Response,
     duration: number,
-    actor?: AuditActor
+    actor?: AuditActor,
   ): TransportContext {
+    const auditContext = (request.audit as RequestAuditInternal).build();
+
     return {
       request: {
         method: request.method,
@@ -29,6 +30,7 @@ export class TransportContextBuilder {
         duration,
       },
       actor,
+      auditContext,
     };
   }
 }
