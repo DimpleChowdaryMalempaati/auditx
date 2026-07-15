@@ -5,7 +5,7 @@ import { resolveActor } from "../resolvers/resolve-actor";
 
 describe("resolveActor", () => {
   it("returns undefined when getActor is not configured", async () => {
-    const request = {} as Request;
+    const request = {} as unknown as Request;
 
     const actor = await resolveActor(request, {});
 
@@ -15,7 +15,7 @@ describe("resolveActor", () => {
   it("returns the actor from getActor", async () => {
     const request = {
       headers: {},
-    } as Request;
+    } as unknown as Request;
 
     const actor = {
       id: "123",
@@ -35,7 +35,7 @@ describe("resolveActor", () => {
   });
 
   it("supports synchronous getActor implementations", async () => {
-    const request = {} as Request;
+    const request = {} as unknown as Request;
 
     const actor = {
       id: "456",
@@ -54,7 +54,7 @@ describe("resolveActor", () => {
   });
 
   it("propagates errors from getActor", async () => {
-    const request = {} as Request;
+    const request = {} as unknown as Request;
 
     const error = new Error("Failed to resolve actor");
 

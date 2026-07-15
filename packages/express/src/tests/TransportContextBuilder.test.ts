@@ -51,7 +51,7 @@ describe("TransportContextBuilder", () => {
             return undefined;
         }
       },
-    } as Request;
+    } as unknown as Request;
   }
 
   function createResponse(): Response {

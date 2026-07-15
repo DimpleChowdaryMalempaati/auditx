@@ -2,10 +2,7 @@ import type { Request } from "express";
 
 import type { AuditMiddlewareOptions } from "../types/audit-middleware-options";
 
-function matchesRoute(
-  path: string,
-  route: string
-): boolean {
+function matchesRoute(path: string, route: string): boolean {
   // "/" should only match "/"
   if (route === "/") {
     return path === "/";
@@ -22,7 +19,7 @@ function matchesRoute(
 
 export function shouldAudit(
   request: Request,
-  options: AuditMiddlewareOptions
+  options: AuditMiddlewareOptions,
 ): boolean {
   const { methods, include, exclude } = options;
 
@@ -30,12 +27,8 @@ export function shouldAudit(
   const path = request.path;
 
   // Method filter
-  if (methods?.length) {
-    const allowedMethods = methods.map((m) => m.toUpperCase());
-
-    if (!allowedMethods.includes(method)) {
-      return false;
-    }
+  if (methods?.length && !methods.includes(method)) {
+    return false;
   }
 
   // Exclude always wins

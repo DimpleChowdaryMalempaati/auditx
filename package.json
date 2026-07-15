@@ -18,7 +18,7 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:integration": "vitest run --config vitest.integration.config.ts",
-    "clean": "rimraf packages/**/dist apps/**/dist",
+    "clean": "npm run clean --workspaces",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "docker:up": "docker compose -f docker/docker-compose.yml up -d",

@@ -6,14 +6,13 @@ export default defineConfig({
 
     globals: true,
 
-    include: ["**/*.test.ts"],
-    exclude: ["**/*.int.test.ts"],
+    include: ["packages/**/src/tests/**/*.test.ts"],
+
+    exclude: ["**/*.int.test.ts", "**/node_modules/**", "**/dist/**"],
 
     coverage: {
       provider: "v8",
-
       reporter: ["text", "html", "lcov"],
-
       reportsDirectory: "./coverage",
     },
   },
