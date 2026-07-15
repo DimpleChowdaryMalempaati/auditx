@@ -1,29 +1,51 @@
 {
-    "name": "@auditx/express",
-    "version": "0.1.0",
-    "description": "Express integration for AuditX.",
-    "type": "module",
-    "main": "./dist/index.mjs",
-    "types": "./dist/index.d.mts",
-    "exports": {
-      ".": {
-        "types": "./dist/index.d.mts",
-        "import": "./dist/index.mjs"
-      }
-    },
-    "files": [
-      "dist"
-    ],
-    "scripts": {
-      "build": "tsdown",
-      "clean": "rimraf dist"
-    },
-    "dependencies": {
-      "@auditx/contracts": "*",
-      "@auditx/core": "*",
-      "express": "^5.1.0"
-    },
-    "devDependencies": {
-      "@types/express": "^5.0.3"
+  "name": "@auditx/express",
+  "version": "0.1.0",
+  "description": "Express integration for AuditX.",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "audit",
+    "audit-log",
+    "express",
+    "middleware",
+    "logging",
+    "typescript",
+    "node"
+  ],
+  "homepage": "https://github.com/DimpleChowdaryMalempaati/auditx#readme",
+  "bugs": {
+    "url": "https://github.com/DimpleChowdaryMalempaati/auditx/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DimpleChowdaryMalempaati/auditx.git",
+    "directory": "packages/express"
+  },
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
     }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@auditx/contracts": "*",
+    "@auditx/core": "*"
+  },
+  "peerDependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "express": "^5.1.0"
   }
+}

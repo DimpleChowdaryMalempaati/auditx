@@ -3,6 +3,24 @@
   "version": "0.1.0",
   "description": "Shared contracts for AuditX.",
   "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "audit",
+    "audit-log",
+    "contracts",
+    "typescript",
+    "node",
+    "logging"
+  ],
+  "homepage": "https://github.com/DimpleChowdaryMalempaati/auditx#readme",
+  "bugs": {
+    "url": "https://github.com/DimpleChowdaryMalempaati/auditx/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DimpleChowdaryMalempaati/auditx.git",
+    "directory": "packages/contracts"
+  },
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "exports": {
@@ -19,7 +37,6 @@
     "clean": "rimraf dist"
   },
   "devDependencies": {
-    "tsup": "^8.5.1",
     "typescript": "^6.0.3"
   }
 }

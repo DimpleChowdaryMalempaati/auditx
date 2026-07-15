@@ -1,26 +1,48 @@
 {
-    "name": "@auditx/postgres",
-    "version": "0.1.0",
-    "description": "PostgreSQL adapter for AuditX.",
-    "type": "module",
-    "main": "./dist/index.mjs",
-    "types": "./dist/index.d.mts",
-    "exports": {
-        ".": {
-            "types": "./dist/index.d.mts",
-            "import": "./dist/index.mjs"
-        }
-    },
-    "files": [
-        "dist"
-    ],
-    "scripts": {
-        "build": "tsdown",
-        "clean": "rimraf dist"
-    },
-    "dependencies": {
-        "@auditx/contracts": "*",
-        "@types/pg": "^8.20.0",
-        "pg": "^8.22.0"
+  "name": "@auditx/postgres",
+  "version": "0.1.0",
+  "description": "PostgreSQL adapter for AuditX.",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "audit",
+    "audit-log",
+    "postgres",
+    "postgresql",
+    "database",
+    "logging",
+    "typescript",
+    "node"
+  ],
+  "homepage": "https://github.com/DimpleChowdaryMalempaati/auditx#readme",
+  "bugs": {
+    "url": "https://github.com/DimpleChowdaryMalempaati/auditx/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DimpleChowdaryMalempaati/auditx.git",
+    "directory": "packages/postgres"
+  },
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
     }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@auditx/contracts": "*",
+    "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.20.0"
+  }
 }

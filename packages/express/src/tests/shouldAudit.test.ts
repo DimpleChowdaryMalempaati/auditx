@@ -3,12 +3,13 @@ import { describe, expect, it } from "vitest";
 import type { Request } from "express";
 
 import { shouldAudit } from "../middleware/should-audit";
+import { normalizeOptions } from "../utils/normalize-options";
 
 function createRequest(method: string, path: string): Request {
   return {
     method,
     path,
-  } as Request;
+  } as unknown as Request;
 }
 
 describe("shouldAudit", () => {
@@ -39,12 +40,13 @@ describe("shouldAudit", () => {
   });
 
   it("matches methods case-insensitively", () => {
-    const request = createRequest("POST", "/users");
-
     expect(
-      shouldAudit(request, {
-        methods: ["post"],
-      }),
+      shouldAudit(
+        createRequest("POST", "/users"),
+        normalizeOptions({
+          methods: ["post"],
+        }),
+      ),
     ).toBe(true);
   });
 
