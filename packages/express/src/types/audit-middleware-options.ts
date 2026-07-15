@@ -28,6 +28,6 @@ export interface AuditMiddlewareOptions {
    * Resolves the authenticated user from the request.
    */
   getActor?: (
-    request: Request
+    request: Request,
   ) => AuditActor | undefined | Promise<AuditActor | undefined>;
 }

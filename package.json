@@ -13,12 +13,13 @@
   "scripts": {
     "build": "npm run build --workspaces",
     "dev": "npm run dev --workspace=apps/example-express",
-    "lint": "npm run lint --workspaces",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:integration": "vitest run --config vitest.integration.config.ts",
-    "clean": "npm run clean --workspaces",
+    "clean": "rimraf packages/*/dist apps/*/dist",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "docker:up": "docker compose -f docker/docker-compose.yml up -d",
@@ -69,7 +70,7 @@
     "tsdown": "^0.21.10",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.62.0",
+    "typescript-eslint": "^8.64.0",
     "vitest": "^4.1.9"
   },
   "lint-staged": {

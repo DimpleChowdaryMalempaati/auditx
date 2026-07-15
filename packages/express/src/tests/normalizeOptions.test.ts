@@ -8,11 +8,7 @@ describe("normalizeOptions", () => {
       methods: ["post", "Patch", "DELETE"],
     });
 
-    expect(options.methods).toEqual([
-      "POST",
-      "PATCH",
-      "DELETE",
-    ]);
+    expect(options.methods).toEqual(["POST", "PATCH", "DELETE"]);
   });
 
   it("preserves other options", () => {

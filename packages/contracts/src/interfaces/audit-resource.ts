@@ -1,4 +1,4 @@
 export interface AuditResource {
-    type: string;
-    id?: string;
-  }
+  type: string;
+  id?: string;
+}

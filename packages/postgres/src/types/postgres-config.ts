@@ -24,6 +24,4 @@ export interface ConnectionConfig extends BasePostgresConfig {
   connection: ConnectionOptions;
 }
 
-export type PostgresConfig =
-  | PoolConfig
-  | ConnectionConfig;
+export type PostgresConfig = PoolConfig | ConnectionConfig;

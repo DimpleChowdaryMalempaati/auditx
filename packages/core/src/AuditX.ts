@@ -1,7 +1,4 @@
-import type {
-  AuditEvent,
-  TransportContext,
-} from "@auditx/contracts";
+import type { AuditEvent, TransportContext } from "@auditx/contracts";
 
 import { AuditEngine } from "./engine/AuditEngine";
 import { AuditEventMapper } from "./engine/AuditEventMapper";

@@ -11,9 +11,7 @@ export class PostgresClient {
 
   private initialized = false;
 
-  constructor(
-    private readonly config: PostgresConfig
-  ) {
+  constructor(private readonly config: PostgresConfig) {
     if ("pool" in config) {
       this.pool = config.pool;
     } else {
@@ -46,9 +44,7 @@ export class PostgresClient {
     const client = await this.pool.connect();
 
     try {
-      await client.query(
-        createTableQuery(this.schema, this.table)
-      );
+      await client.query(createTableQuery(this.schema, this.table));
 
       this.initialized = true;
     } finally {
@@ -62,11 +58,7 @@ export class PostgresClient {
     const client = await this.pool.connect();
 
     try {
-      const query = insertAuditQuery(
-        this.schema,
-        this.table,
-        event
-      );
+      const query = insertAuditQuery(this.schema, this.table, event);
 
       await client.query(query.text, query.values);
     } finally {

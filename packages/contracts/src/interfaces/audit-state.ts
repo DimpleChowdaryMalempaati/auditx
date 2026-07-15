@@ -1,4 +1,4 @@
 export interface AuditState {
-    before?: unknown;
-    after?: unknown;
-  }
+  before?: unknown;
+  after?: unknown;
+}

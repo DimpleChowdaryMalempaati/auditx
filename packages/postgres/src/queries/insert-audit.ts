@@ -10,7 +10,7 @@ export interface InsertAuditQuery {
 export function insertAuditQuery(
   schema: string,
   table: string,
-  event: AuditEvent
+  event: AuditEvent,
 ): InsertAuditQuery {
   const safeSchema = validateIdentifier(schema);
   const safeTable = validateIdentifier(table);

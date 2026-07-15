@@ -6,7 +6,7 @@ import type { AuditMiddlewareOptions } from "../types/audit-middleware-options";
 
 export async function resolveActor(
   request: Request,
-  options: AuditMiddlewareOptions
+  options: AuditMiddlewareOptions,
 ): Promise<AuditActor | undefined> {
   if (!options.getActor) {
     return undefined;
