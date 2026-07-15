@@ -1,9 +1,6 @@
 import { validateIdentifier } from "../utils/validate-identifier";
 
-export function createTableQuery(
-  schema: string,
-  table: string
-): string {
+export function createTableQuery(schema: string, table: string): string {
   const safeSchema = validateIdentifier(schema);
   const safeTable = validateIdentifier(table);
 

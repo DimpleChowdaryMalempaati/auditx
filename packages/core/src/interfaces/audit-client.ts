@@ -1,7 +1,4 @@
-import type {
-  AuditEvent,
-  TransportContext,
-} from "@auditx/contracts";
+import type { AuditEvent, TransportContext } from "@auditx/contracts";
 
 export interface AuditClient {
   /**

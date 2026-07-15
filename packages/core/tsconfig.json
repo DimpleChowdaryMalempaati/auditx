@@ -14,7 +14,5 @@
     }
   ],
 
-  "include": [
-    "src"
-, "src/tests"  ]
+  "include": ["src", "src/tests"]
 }

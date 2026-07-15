@@ -7,7 +7,7 @@ import type { AuditMiddlewareOptions } from "../types/audit-middleware-options";
 
 export function createAuditMiddleware(
   audit: AuditX,
-  options: AuditMiddlewareOptions = {}
+  options: AuditMiddlewareOptions = {},
 ): RequestHandler {
   return new AuditMiddleware(audit, options).handler();
 }

@@ -1,10 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
-import {
-  AuditAction,
-  AuditStatus,
-  type AuditEvent,
-} from "@auditx/contracts";
+import { AuditAction, AuditStatus, type AuditEvent } from "@auditx/contracts";
 
 import { AuditEngine } from "../engine/AuditEngine";
 
@@ -37,10 +33,7 @@ describe("AuditEngine", () => {
       application: {
         name: "auditx-test",
       },
-      adapters: [
-        { persist: persist1 },
-        { persist: persist2 },
-      ],
+      adapters: [{ persist: persist1 }, { persist: persist2 }],
     });
 
     const event = createEvent();
@@ -60,9 +53,7 @@ describe("AuditEngine", () => {
         version: "1.0.0",
         environment: "test",
       },
-      adapters: [
-        { persist },
-      ],
+      adapters: [{ persist }],
     });
 
     await engine.log(createEvent());
@@ -87,9 +78,7 @@ describe("AuditEngine", () => {
       application: {
         name: "auditx",
       },
-      adapters: [
-        { persist },
-      ],
+      adapters: [{ persist }],
     });
 
     const event = createEvent();
@@ -121,9 +110,7 @@ describe("AuditEngine", () => {
       application: {
         name: "auditx",
       },
-      adapters: [
-        { persist },
-      ],
+      adapters: [{ persist }],
     });
 
     const event = createEvent();
