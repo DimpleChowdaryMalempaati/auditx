@@ -4,6 +4,7 @@ import { AuditEngine } from "./engine/AuditEngine";
 import { AuditEventMapper } from "./engine/AuditEventMapper";
 import type { AuditClient } from "./interfaces/audit-client";
 import type { AuditConfig } from "./interfaces/audit-config";
+import { validateConfig } from "./validation/validate-config";
 
 export class AuditX implements AuditClient {
   private readonly engine: AuditEngine;
@@ -11,6 +12,8 @@ export class AuditX implements AuditClient {
   private readonly mapper: AuditEventMapper;
 
   constructor(config: AuditConfig) {
+    validateConfig(config);
+
     this.engine = new AuditEngine(config);
     this.mapper = new AuditEventMapper();
   }
