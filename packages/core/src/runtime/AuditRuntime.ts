@@ -1,23 +1,24 @@
 import { AuditEngine } from "../engine/AuditEngine";
 import { AuditEventMapper } from "../engine/AuditEventMapper";
-import { ConsoleLogger } from "../logger/ConsoleLogger";
 import type { AuditConfig } from "../interfaces/audit-config";
 import type { Logger } from "../interfaces/logger";
+import { ConsoleLogger } from "../logger/ConsoleLogger";
+import { AuditPipeline } from "../pipeline/AuditPipeline";
 import { validateConfig } from "../validation/validate-config";
 
 export class AuditRuntime {
-  readonly engine: AuditEngine;
+  readonly pipeline: AuditPipeline;
 
   readonly mapper: AuditEventMapper;
 
   readonly logger: Logger;
 
   private constructor(
-    engine: AuditEngine,
+    pipeline: AuditPipeline,
     mapper: AuditEventMapper,
     logger: Logger,
   ) {
-    this.engine = engine;
+    this.pipeline = pipeline;
     this.mapper = mapper;
     this.logger = logger;
   }
@@ -29,8 +30,10 @@ export class AuditRuntime {
 
     const engine = new AuditEngine(config);
 
+    const pipeline = new AuditPipeline(engine);
+
     const mapper = new AuditEventMapper();
 
-    return new AuditRuntime(engine, mapper, logger);
+    return new AuditRuntime(pipeline, mapper, logger);
   }
 }
