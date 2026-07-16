@@ -12,7 +12,7 @@ export class AuditX implements AuditClient {
   }
 
   async log(event: AuditEvent): Promise<void> {
-    await this.runtime.engine.log(event);
+    await this.runtime.pipeline.process(event);
   }
 
   async capture(context: TransportContext): Promise<void> {
