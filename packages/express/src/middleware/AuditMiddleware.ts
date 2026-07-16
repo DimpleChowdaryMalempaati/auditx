@@ -49,24 +49,17 @@ export class AuditMiddleware {
     response: Response,
     startTime: number,
   ): Promise<void> {
-    try {
-      const duration = Date.now() - startTime;
+    const duration = Date.now() - startTime;
 
-      const actor = await resolveActor(request, this.options);
+    const actor = await resolveActor(request, this.options);
 
-      const context = this.transportContextBuilder.build(
-        request,
-        response,
-        duration,
-        actor,
-      );
+    const context = this.transportContextBuilder.build(
+      request,
+      response,
+      duration,
+      actor,
+    );
 
-      await this.audit.capture(context);
-    } catch (error) {
-      /**
-       * Audit failures must never break the application.
-       */
-      console.error("AuditX failed to capture audit event.", error);
-    }
+    await this.audit.capture(context);
   }
 }

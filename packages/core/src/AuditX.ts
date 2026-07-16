@@ -1,30 +1,27 @@
 import type { AuditEvent, TransportContext } from "@auditx/contracts";
 
-import { AuditEngine } from "./engine/AuditEngine";
-import { AuditEventMapper } from "./engine/AuditEventMapper";
 import type { AuditClient } from "./interfaces/audit-client";
 import type { AuditConfig } from "./interfaces/audit-config";
-import { validateConfig } from "./validation/validate-config";
+import { AuditRuntime } from "./runtime/AuditRuntime";
 
 export class AuditX implements AuditClient {
-  private readonly engine: AuditEngine;
-
-  private readonly mapper: AuditEventMapper;
+  private readonly runtime: AuditRuntime;
 
   constructor(config: AuditConfig) {
-    validateConfig(config);
-
-    this.engine = new AuditEngine(config);
-    this.mapper = new AuditEventMapper();
+    this.runtime = AuditRuntime.create(config);
   }
 
   async log(event: AuditEvent): Promise<void> {
-    await this.engine.log(event);
+    await this.runtime.engine.log(event);
   }
 
   async capture(context: TransportContext): Promise<void> {
-    const event = this.mapper.map(context);
+    try {
+      const event = this.runtime.mapper.map(context);
 
-    await this.log(event);
+      await this.log(event);
+    } catch (error) {
+      this.runtime.logger.error("AuditX failed to capture audit event.", error);
+    }
   }
 }
